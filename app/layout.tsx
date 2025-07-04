@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Quicksand, Tourney, Stalinist_One, Michroma } from 'next/font/google';
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const quicksand = Quicksand ({
+  variable: "--font-body",
+  weight: ['300', '400', '500', '600', '700'],
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const tourney = Tourney({
+  variable: "--font-heading",
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800'],
   subsets: ["latin"],
 });
 
@@ -25,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${quicksand.variable} ${tourney.variable} antialiased`}
       >
         {children}
       </body>
