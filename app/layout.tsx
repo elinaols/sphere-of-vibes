@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Quicksand, Tourney, Stalinist_One, Michroma } from 'next/font/google';
+import { Quicksand, Tourney } from 'next/font/google'; // Stalinist_One, Michroma
 import "./globals.css";
 
 const quicksand = Quicksand ({
