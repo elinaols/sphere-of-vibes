@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Quicksand, Tourney } from 'next/font/google'; // Stalinist_One, Michroma
 import "./globals.css";
+import AuthProvider from "./components/AuthProvider";
 
 const quicksand = Quicksand ({
   variable: "--font-body",
@@ -29,7 +30,9 @@ export default function RootLayout({
       <body
         className={`${quicksand.variable} ${tourney.variable} antialiased`}
       >
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

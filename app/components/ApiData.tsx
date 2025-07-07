@@ -1,8 +1,8 @@
+/*
 import React from 'react'
-
 type Post = {
     name: string,
-    id: number,
+    id?: number,
     menu: Array<string>
 }
 
@@ -17,4 +17,4 @@ export default async function ApiData() {
             ))}
         </>
     )
-}
+}*/
