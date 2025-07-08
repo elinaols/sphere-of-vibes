@@ -8,7 +8,7 @@ export default function LoginStatus() {
     if (session) {
         return (
             <div className='flex justify-center p-2'>
-                <p>Inloggad som <span className='font-bold'>{session.user?.email}</span></p>
+                <p className='pe-3'>Inloggad som <span className='font-bold'>{session.user?.email}</span></p>
                 <button className='font-bold px-2 border cursor-grab rounded-lg hover:bg-(--accent)' onClick={() => signOut()}>Logga ut</button>
             </div>
         )
