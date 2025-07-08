@@ -9,7 +9,7 @@ export default function LoginStatus() {
         return (
             <div>
                 <p>Inloggad som {session.user?.email}</p>
-                <button className='font-bold' onClick={() => signOut()}>- Logga ut</button>
+                <button className='font-bold hover:font-bold px-2 border cursor-grab rounded-lg hover:bg-(--accent)' onClick={() => signOut()}>- Logga ut</button>
             </div>
         )
     } else {
