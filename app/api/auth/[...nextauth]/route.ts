@@ -1,7 +1,6 @@
 import NextAuth from "next-auth"
 import SpotifyProvider from "next-auth/providers/spotify"
 
-
 // Configuration to be able to authenticate users with the SpotifyProvider
 export const handler = NextAuth({
     providers: [
@@ -16,16 +15,14 @@ export const handler = NextAuth({
         }),
     ],
     callbacks: {
-        async jwt ({token, account}) {
+        async jwt({token, account}) {
             if (account) {
                 token.accessToken = account.access_token
             }
             return token
         },
-        async session ({session, token}) {
-            if (typeof token.accessToken === 'string') {
-                session.accessToken = token.accessToken 
-            }
+        async session({session, token}) {
+            session.accessToken = token.accessToken as string
             return session
         }
     }
