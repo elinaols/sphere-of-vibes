@@ -1,4 +1,3 @@
-/*
 import React from 'react'
 type Post = {
     name: string,
@@ -17,4 +16,4 @@ export default async function ApiData() {
             ))}
         </>
     )
-}*/
+}
