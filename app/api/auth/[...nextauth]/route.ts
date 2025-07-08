@@ -1,27 +1,32 @@
 import NextAuth from "next-auth"
 import SpotifyProvider from "next-auth/providers/spotify"
 
+
 // Configuration to be able to authenticate users with the SpotifyProvider
-const handler = NextAuth({
+export const handler = NextAuth({
     providers: [
         SpotifyProvider({
-            authorization: "https://accounts.spotify.com/authorize?scope=user-read-email,playlist-read-private,playlist-modify-private,playlist-modify-public",
             clientId: process.env.SPOTIFY_CLIENT_ID!,
             clientSecret: process.env.SPOTIFY_CLIENT_SECRET!,
+            authorization: {
+                params: {
+                    scope: "user-read-private user-read-email streaming user-read-playback-state user-modify-playback-state"
+                }
+            }
         }),
     ],
     callbacks: {
         async jwt ({token, account}) {
             if (account) {
-                token.access_token = account.access_token
+                token.accessToken = account.access_token
             }
             return token
         },
         async session ({session, token}) {
-            return {
-                ...session,
-                token
+            if (typeof token.accessToken === 'string') {
+                session.accessToken = token.accessToken 
             }
+            return session
         }
     }
 })
