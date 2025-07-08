@@ -25,7 +25,8 @@ export const handler = NextAuth({
             session.accessToken = token.accessToken as string
             return session
         }
-    }
+    },
+    secret: process.env.NEXTAUTH_SECRET!
 })
 
 export { handler as GET, handler as POST }
