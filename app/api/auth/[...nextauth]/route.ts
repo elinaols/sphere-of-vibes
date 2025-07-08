@@ -16,17 +16,23 @@ const handler = NextAuth ({
     ],
     callbacks: {
         async jwt({token, account}) {
+            console.log('JWT CALLBACK', {token, account})
             if (account) {
-                token.access_token = account.access_token
+                token.id = account.id;
+                token.expires_at = account.expires_at;
+                token.accessToken = account.access_token;
             }
             return token
         },
         async session({session, token}) {
-            session.accessToken = token.accessToken as string
-            return session
+            console.log('SESSION CALLBACK', {session, token})
+            return { 
+                ...session,
+                token
+            }
         }
     },
-    secret: process.env.NEXTAUTH_SECRET!
+    secret: process.env.NEXTAUTH_SECRET
 })
 
 export { handler as GET, handler as POST}
