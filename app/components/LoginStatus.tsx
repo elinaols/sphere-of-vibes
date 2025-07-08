@@ -7,16 +7,16 @@ export default function LoginStatus() {
     
     if (session) {
         return (
-            <div>
-                <p>Inloggad som {session.user?.email}</p>
-                <button className='font-bold hover:font-bold px-2 border cursor-grab rounded-lg hover:bg-(--accent)' onClick={() => signOut()}>- Logga ut</button>
+            <div className='flex justify-center p-2'>
+                <p>Inloggad som <span className='font-bold'>{session.user?.email}</span></p>
+                <button className='font-bold px-2 border cursor-grab rounded-lg hover:bg-(--accent)' onClick={() => signOut()}>Logga ut</button>
             </div>
         )
     } else {
         return (
             <div className='flex justify-center p-2'>
                 <p className='pe-3'>Inte inloggad</p>
-                <button className='hover:font-bold px-2 border cursor-grab rounded-lg hover:bg-(--accent)' onClick={() => signIn('spotify')}>Logga in med Spotify</button>
+                <button className='font-bold px-2 border cursor-grab rounded-lg hover:bg-(--accent)' onClick={() => signIn('spotify')}>Logga in med Spotify</button>
             </div>
         )
     }
