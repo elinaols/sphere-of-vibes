@@ -1,15 +1,30 @@
 "use client"
-import React from "react"
+import React, { FormEvent } from "react"
 import {useSession} from "next-auth/react"
-import Form from "next/form"
 
 export default function SearchOnSpotify() {
 	const {data: session} = useSession()
 
 	const disable = session ? "cursor-grab" : "cursor-not-allowed"
 
+    async function onSubmit(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault()
+
+        const formData = new FormData(event.currentTarget)
+        const response = await fetch('/ApiData', {
+            method: 'GET',
+            body: formData
+        })
+
+        if (!response.ok) throw new Error('Failed to submit data.')
+
+        const data = await response.json()
+
+        console.log(data)
+    }
+
 	return (
-		<Form action={"/ApiData"} className="flex justify-center gap-4 pb-4 pt-10">
+		<form onSubmit={onSubmit} className="flex justify-center gap-4 pb-4 pt-10">
 			<input
 				name="query"
 				type="text"
@@ -21,6 +36,6 @@ export default function SearchOnSpotify() {
 				disabled={!session}>
 				Sök
 			</button>
-		</Form>
+		</form>
 	)
 }
