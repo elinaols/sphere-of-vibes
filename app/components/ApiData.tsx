@@ -1,19 +1,35 @@
+import { NextApiRequest, NextApiResponse } from 'next'
+import { getSession } from 'next-auth/react'
 import React from 'react'
-type Post = {
-    name: string,
-    id?: number,
-    menu: Array<string>
-}
 
-export default async function ApiData() {
-    const data = await fetch('https://webbkurs.ei.hv.se/~elol0031/JSR200/Checkpoint_2/restaurants.json')
-    const posts = await data.json()
+export default async function ApiData(
+    req: NextApiRequest, 
+    res: NextApiResponse
+) {
+    const query = req.query?.q
+    const session = await getSession({req})
+
+    if (!session?.token?.accessToken) {
+        return res.status(401).json({error: "No authenticated user"})
+    }
+
+    const response = await fetch(`https://api.spotify.com/v1/search?q=${query}&market=from_token&type=album,track,artist,playlist&limit=5`,
+        {
+            headers: {
+                Autorization: `Bearer ${session.token.accessToken}`,
+                'Content-Type': 'application/json'
+            }
+        }
+    )
+
+    const results = await response.json()
+    console.log(results)
 
     return (
         <>
-            {posts.map((post: Post) => (
+            {/*posts.map((post: Post) => (
                 <li className='list-none' key={post.id}>{post.name}</li>
-            ))}
+            ))*/}
         </>
     )
 }

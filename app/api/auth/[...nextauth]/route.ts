@@ -17,15 +17,18 @@ const handler = NextAuth ({
     callbacks: {
         async jwt({token, account}) {
             console.log('JWT CALLBACK', {token, account})
+            // Checks if it's a new login and saves user account info in the token
             if (account) {
                 token.id = account.id;
                 token.expires_at = account.expires_at;
                 token.accessToken = account.access_token;
             }
+            // Returns the token for use in session
             return token
         },
         async session({session, token}) {
             console.log('SESSION CALLBACK', {session, token})
+            // Adds the token to the session to keep track of the login
             return { 
                 ...session,
                 token
