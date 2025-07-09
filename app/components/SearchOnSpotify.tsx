@@ -1,8 +1,13 @@
 "use client"
 import React, { FormEvent } from "react"
 import {useSession} from "next-auth/react"
+import { Json } from "@/types/json"
 
-export default function SearchOnSpotify() {
+type Props = {
+    setResults: (results: Json) => void
+}
+
+export default function SearchOnSpotify({setResults}: Props) {
 	const {data: session} = useSession()
 
 	const disable = session ? "cursor-grab" : "cursor-not-allowed"
@@ -21,25 +26,27 @@ export default function SearchOnSpotify() {
             if (!response.ok) throw new Error('Failed to fetch data.')
     
             const data = await response.json()
-            console.log(data)
+            setResults(data)
         } catch (error) {
             console.error("Error while fetching data", error)
         } 
     }
 
 	return (
-		<form onSubmit={onSubmit} className="flex justify-center gap-4 pb-4 pt-10">
-			<input
-				name="query"
-				type="text"
-				className="border border-(--secondary) hover:border-(--accent) rounded-2xl p-6 min-w-[500px]"
-			/>
-			<button
-                type="submit"
-				className={`${disable} font-bold hover:bg-(--accent) bg-(--secondary) hover:scale-102 rounded-2xl p-6`}
-				disabled={!session}>
-				Sök
-			</button>
-		</form>
+        <>
+            <form onSubmit={onSubmit} className="flex justify-center gap-4 pb-4 pt-10">
+                <input
+                    name="query"
+                    type="text"
+                    className="border border-(--secondary) hover:border-(--accent) rounded-2xl p-6 min-w-[500px]"
+                />
+                <button
+                    type="submit"
+                    className={`${disable} font-bold hover:bg-(--accent) bg-(--secondary) hover:scale-102 rounded-2xl p-6`}
+                    disabled={!session}>
+                    Sök
+                </button>
+            </form>
+        </>
 	)
 }
