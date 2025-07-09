@@ -7,15 +7,13 @@ export default async function ApiData(
 ) {
     const query = req.query?.query
 
-    if (!query || Array.isArray(query)) return res.status(400).json({ error: 'Invalid or missing query parameter' })
-
     const session = await getSession({req})
 
     if (!session?.token?.accessToken) {
         return res.status(401).json({error: "No authenticated user"})
     }
 
-    const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&market=from_token&type=album,track,artist,playlist&limit=5`,
+    const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query as string)}&market=from_token&type=album,track,artist,playlist&limit=5`,
         {
             headers: {
                 Authorization: `Bearer ${session.token.accessToken}`,
