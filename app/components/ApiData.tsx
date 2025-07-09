@@ -6,7 +6,7 @@ export default async function ApiData(
     req: NextApiRequest, 
     res: NextApiResponse
 ) {
-    const query = req.query?.q
+    const query = req.query?.query
     const session = await getSession({req})
 
     if (!session?.token?.accessToken) {
@@ -16,11 +16,13 @@ export default async function ApiData(
     const response = await fetch(`https://api.spotify.com/v1/search?q=${query}&market=from_token&type=album,track,artist,playlist&limit=5`,
         {
             headers: {
-                Autorization: `Bearer ${session.token.accessToken}`,
+                Authorization: `Bearer ${session.token.accessToken}`,
                 'Content-Type': 'application/json'
             }
         }
     )
+
+    if (!response.ok) return res.status(response.status).json({error: 'Spotify API error'})
 
     const results = await response.json()
     console.log(results)
