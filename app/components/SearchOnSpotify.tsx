@@ -8,18 +8,23 @@ export default function SearchOnSpotify() {
 	const disable = session ? "cursor-grab" : "cursor-not-allowed"
 
     async function onSubmit(event: FormEvent<HTMLFormElement>) {
-        event.preventDefault()
+        try {
+            event.preventDefault()
+    
+            const formData = new FormData(event.currentTarget)
+            const query = formData.get('query')
 
-        const formData = new FormData(event.currentTarget)
-        const query = formData.get('query')
-
-        const response = await fetch(`/api/apiData?query=${encodeURIComponent(query as string)}`)
-
-        if (!response.ok) throw new Error('Failed to fetch data.')
-
-        const data = await response.json()
-
-        console.log(data)
+            if (!query) return console.log("No query provided")
+    
+            const response = await fetch(`/api/apiData?query=${encodeURIComponent(query as string)}`)
+    
+            if (!response.ok) throw new Error('Failed to fetch data.')
+    
+            const data = await response.json()
+            console.log(data)
+        } catch (error) {
+            console.error("Error while fetching data", error)
+        } 
     }
 
 	return (
