@@ -1,8 +1,8 @@
-import NextAuth from "next-auth"
+import NextAuth, { NextAuthOptions } from "next-auth"
 import SpotifyProvider from "next-auth/providers/spotify"
 
 // Configuration to be able to authenticate users with the SpotifyProvider
-const handler = NextAuth ({
+export const authOptions: NextAuthOptions = {
     providers: [
         SpotifyProvider({
             clientId: process.env.SPOTIFY_CLIENT_ID!,
@@ -12,7 +12,7 @@ const handler = NextAuth ({
                     scope: "user-read-private user-read-email streaming user-read-playback-state user-modify-playback-state"
                 }
             }
-        }),
+        })
     ],
     callbacks: {
         async jwt({token, account}) {
@@ -36,6 +36,7 @@ const handler = NextAuth ({
         }
     },
     secret: process.env.NEXTAUTH_SECRET
-})
+}
 
+const handler = NextAuth(authOptions)
 export { handler as GET, handler as POST}

@@ -1,11 +1,12 @@
 import { NextResponse, NextRequest } from 'next/server'
-import { getSession } from 'next-auth/react'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '../auth/[...nextauth]/route'
 
 export default async function apiData(req: NextRequest) {
     const {searchParams} = new URL(req.url)
     const query = searchParams.get('query')
 
-    const session = await getSession({req: req as any})
+    const session = await getServerSession(authOptions)
 
     if (!session?.token?.accessToken) {
         return NextResponse.json({error: "No authenticated user"}, {status: 401})
