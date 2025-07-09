@@ -13,7 +13,7 @@ export default function SearchOnSpotify() {
         const formData = new FormData(event.currentTarget)
         const query = formData.get('query')
 
-        const response = await fetch(`/ApiData?query=${encodeURIComponent(query as string)}`)
+        const response = await fetch(`/api/apiData?query=${encodeURIComponent(query as string)}`)
 
         if (!response.ok) throw new Error('Failed to fetch data.')
 

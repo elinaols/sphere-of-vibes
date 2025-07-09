@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
 
-export default async function ApiData(
+export default async function apiData(
     req: NextApiRequest, 
     res: NextApiResponse
 ) {
