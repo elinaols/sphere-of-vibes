@@ -2,9 +2,9 @@ import { NextResponse, NextRequest } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '../auth/[...nextauth]/route'
 
-export default async function apiData(req: NextRequest) {
+export default async function GET(req: NextRequest) {
     const {searchParams} = new URL(req.url)
-    const query = searchParams.get('query')
+    const query = searchParams.get('query') ?? ''
 
     const session = await getServerSession(authOptions)
 
@@ -12,7 +12,7 @@ export default async function apiData(req: NextRequest) {
         return NextResponse.json({error: "No authenticated user"}, {status: 401})
     }
 
-    const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query ?? '')}&market=from_token&type=album,track,artist,playlist&limit=5`,
+    const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&market=from_token&type=album,track,artist,playlist&limit=5`,
         {
             headers: {
                 Authorization: `Bearer ${session.token.accessToken}`,
