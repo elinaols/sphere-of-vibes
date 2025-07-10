@@ -5,9 +5,10 @@ import { Json } from "@/types/json"
 
 type Props = {
     setResults: (results: Json) => void
+    setType: (type: string) => void
 }
 
-export default function SearchOnSpotify({setResults}: Props) {
+export default function SearchOnSpotify({setResults, setType}: Props) {
 	const {data: session} = useSession()
 
 	const disable = session ? "cursor-grab" : "cursor-not-allowed"
@@ -19,6 +20,8 @@ export default function SearchOnSpotify({setResults}: Props) {
             const formData = new FormData(event.currentTarget)
             const query = formData.get('query')
             const type = formData.get('type')
+
+            if (typeof type === 'string') setType(type)
 
             if (!query) return console.log("No query provided")
     
@@ -41,7 +44,7 @@ export default function SearchOnSpotify({setResults}: Props) {
                     type="text"
                     className="border border-(--secondary) hover:border-(--accent) rounded-2xl p-6 min-w-[500px]"
                 />
-                <select name="type" defaultValue="artist" className={`${disable} font-bold hover:bg-(--accent) bg-(--secondary) rounded-2xl p-6 appearance-none bg-[url(/arrow-down.png)] bg-no-repeat bg-[right_0.7rem_center]`} disabled={!session}>
+                <select name="type" defaultValue="artist" className={`${disable} font-bold hover:bg-(--accent) text-start bg-(--secondary) rounded-2xl p-6 appearance-none bg-[url(/arrow-down.png)] bg-no-repeat bg-[right_0.3rem_center]`} >
                     <option value="artist">Artist</option>
                     <option value="track">Låt</option>
                     <option value="album">Album</option>
