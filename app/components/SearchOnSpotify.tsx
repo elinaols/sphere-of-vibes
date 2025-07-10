@@ -18,10 +18,11 @@ export default function SearchOnSpotify({setResults}: Props) {
     
             const formData = new FormData(event.currentTarget)
             const query = formData.get('query')
+            const type = formData.get('type')
 
             if (!query) return console.log("No query provided")
     
-            const response = await fetch(`/api/apiData?query=${encodeURIComponent(query as string)}`)
+            const response = await fetch(`/api/apiData?query=${encodeURIComponent(query as string)}&type=${encodeURIComponent(type as string)}`)
     
             if (!response.ok) throw new Error('Failed to fetch data.')
     
@@ -40,6 +41,12 @@ export default function SearchOnSpotify({setResults}: Props) {
                     type="text"
                     className="border border-(--secondary) hover:border-(--accent) rounded-2xl p-6 min-w-[500px]"
                 />
+                <select name="type" defaultValue="artist" className={`${disable} font-bold hover:bg-(--accent) bg-(--secondary) rounded-2xl p-6 appearance-none bg-[url(/arrow-down.png)] bg-no-repeat bg-[right_0.7rem_center]`} disabled={!session}>
+                    <option value="artist">Artist</option>
+                    <option value="track">Låt</option>
+                    <option value="album">Album</option>
+                    <option value="playlist">Spellista</option>
+                </select>
                 <button
                     type="submit"
                     className={`${disable} font-bold hover:bg-(--accent) bg-(--secondary) hover:scale-102 rounded-2xl p-6`}
