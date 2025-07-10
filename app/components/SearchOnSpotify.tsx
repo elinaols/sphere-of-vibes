@@ -45,10 +45,10 @@ export default function SearchOnSpotify({setResults, setType}: Props) {
                     className="border border-(--secondary) hover:border-(--accent) rounded-2xl p-6 min-w-[500px]"
                 />
                 <select name="type" defaultValue="artist" className={`${disable} font-bold hover:bg-(--accent) text-start bg-(--secondary) rounded-2xl p-6 appearance-none bg-[url(/arrow-down.png)] bg-no-repeat bg-[right_0.3rem_center]`} >
-                    <option value="artists">Artist</option>
-                    <option value="tracks">Låt</option>
-                    <option value="albums">Album</option>
-                    <option value="playlists">Spellista</option>
+                    <option value="artist">Artist</option>
+                    <option value="track">Låt</option>
+                    <option value="album">Album</option>
+                    <option value="playlist">Spellista</option>
                 </select>
                 <button
                     type="submit"

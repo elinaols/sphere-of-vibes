@@ -10,7 +10,8 @@ type Props = {
 
 export default function SpotifyResults ({results, type}: Props) {
     console.log('DATAAAAAAAAA', results)
-    console.log('TYPE', type)
+    const mapType = type + 's'
+    console.log('TYPE', mapType)
     return (
         <div className="py-10 px-50 flex w-full justify-center gap-8">
             <ArtistCard/>
