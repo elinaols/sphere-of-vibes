@@ -1,11 +1,39 @@
 import React from 'react'
 import ArtistCard from './ArtistCard'
 
+type SpotifyUrl = {
+    spotify: string
+}
+
+type SpotifyFollowers = {
+    href: string | null,
+    total: number
+}
+
+type SpotifyImages = {
+    height: number,
+    url: string, 
+    width: number,
+}
+
+type SpotifyArtist = {
+    external_urls: SpotifyUrl,
+    followers: SpotifyFollowers,
+    genres: string[],
+    href: string,
+    id: string,
+    images: SpotifyImages[],
+    name: string,
+    popularity: number,
+    type: string,
+    uri: string,
+}
+
 type Props = {
     // Using a built-in TS-utility to type an object with dynamic string keys and values of various types
     results: {
         [key: string]: {
-            items: any[]
+            items: SpotifyArtist[] 
         }
     },
     type: string
