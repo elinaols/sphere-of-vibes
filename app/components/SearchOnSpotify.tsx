@@ -4,7 +4,7 @@ import {useSession} from "next-auth/react"
 import { Json } from "@/types/json"
 
 type Props = {
-    setResults: (results: Json) => void
+    setResults: (results: Json | null) => void
     setType: (type: string) => void
 }
 
