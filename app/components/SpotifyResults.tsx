@@ -1,21 +1,35 @@
 import React from 'react'
 import ArtistCard from './ArtistCard'
-import { Json } from '@/types/json'
 
 type Props = {
     // Using a built-in TS-utility to type an object with dynamic string keys and values of various types
-    results: Json,
+    results: {
+        [key: string]: {
+            items: any[]
+        }
+    },
     type: string
 }
 
 export default function SpotifyResults ({results, type}: Props) {
-    console.log('DATAAAAAAAAA', results)
-    // Adds letter 's' to be able to use the new variable in the mapping of results
+    console.log('Results', results)
+
+    // Added 's' to type for correct results mapping 
     const mapType = `${type}s`
+
     console.log('TYPE', mapType)
-    return (
-        <div className="py-10 px-50 flex w-full justify-center gap-8">
-            <ArtistCard/>
-        </div>
-    )
-}
+
+    if (!results) return null
+
+    const items = results[mapType].items
+
+    {
+        items.map((item, index) => {
+            console.log(item, index)
+            return (
+                <div key={index} className="py-10 px-50 flex w-full justify-center gap-8">
+                    {JSON.stringify(item)}
+                    <ArtistCard/>
+                </div>
+            )})
+}}
