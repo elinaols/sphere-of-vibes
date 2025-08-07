@@ -16,7 +16,9 @@ export default function Home() {
       <main className="basis-3/4 flex justify-center text-center flex-col">
         <SearchOnSpotify setResults={setResults} setType={setType}/>
         <LoginStatus/>
-        <SpotifyResults results={results} type={type}/>
+        <section className="flex flex-col">
+          <SpotifyResults results={results} type={type}/>
+        </section>
       </main>
     </div>
   );
