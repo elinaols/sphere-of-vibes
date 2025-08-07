@@ -4,11 +4,11 @@ import Header from "./components/Header";
 import LoginStatus from "./components/LoginStatus";
 import SearchOnSpotify from "./components/SearchOnSpotify";
 import SpotifyResults from "./components/SpotifyResults";
-import { Json } from "@/types/json";
+import { SpotifyResultsData, SpotifySearchType } from "@/types/json";
 
 export default function Home() {
-  const [results, setResults] = useState<Json | null>(null)
-  const [type, setType] = useState<string>('artist')
+  const [results, setResults] = useState<SpotifyResultsData | null>(null)
+  const [type, setType] = useState<SpotifySearchType>('artist')
 
   return (
     <div className="box-border min-h-screen p-0 m-0 bg-linear-200/shorter from-(--black) to-(--purple) flex flex-col">

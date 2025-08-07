@@ -1,11 +1,11 @@
 "use client"
 import React, { FormEvent } from "react"
 import {useSession} from "next-auth/react"
-import { Json } from "@/types/json"
+import { SpotifyResultsData, SpotifySearchType } from "@/types/json"
 
 type Props = {
-    setResults: (results: Json | null) => void
-    setType: (type: string) => void
+    setResults: (results: SpotifyResultsData) => void
+    setType: (type: SpotifySearchType) => void
 }
 
 export default function SearchOnSpotify({setResults, setType}: Props) {
@@ -21,7 +21,7 @@ export default function SearchOnSpotify({setResults, setType}: Props) {
             const query = formData.get('query')
             const type = formData.get('type')
 
-            if (typeof type === 'string') setType(type)
+            if (typeof type === 'string') setType(type as SpotifySearchType)
 
             if (!query) return console.log("No query provided")
     

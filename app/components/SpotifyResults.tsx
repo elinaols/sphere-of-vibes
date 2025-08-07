@@ -1,42 +1,11 @@
 import React from 'react'
 import ArtistCard from './ArtistCard'
-
-type SpotifyUrl = {
-    spotify: string
-}
-
-type SpotifyFollowers = {
-    href: string | null,
-    total: number
-}
-
-type SpotifyImages = {
-    height: number,
-    url: string, 
-    width: number,
-}
-
-type SpotifyArtist = {
-    external_urls: SpotifyUrl,
-    followers: SpotifyFollowers,
-    genres: string[],
-    href: string,
-    id: string,
-    images: SpotifyImages[],
-    name: string,
-    popularity: number,
-    type: string,
-    uri: string,
-}
+import { SpotifyResultsData, SpotifySearchType, SpotifyItemsTracks, SpotifyItemsArtists, SpotifyItemsPlayLists } from '../../types/json'
 
 type Props = {
     // Using a built-in TS-utility to type an object with dynamic string keys and values of various types
-    results: {
-        [key: string]: {
-            items: SpotifyArtist[] 
-        }
-    },
-    type: string
+    results: SpotifyResultsData | null,
+    type: SpotifySearchType
 }
 
 export default function SpotifyResults ({results, type}: Props) {
@@ -49,7 +18,33 @@ export default function SpotifyResults ({results, type}: Props) {
 
     if (!results) return null
 
-    const items = results[mapType].items
+    let items: (SpotifyItemsArtists | SpotifyItemsTracks | SpotifyItemsPlayLists)[] = []
+
+    switch (type) {
+        case 'artist': 
+            if (results && 'artists' in results) {
+                items = results.artists.items
+            }
+            break
+
+        case 'track': 
+            if (results && 'tracks' in results) {
+                items = results.tracks.items
+            }
+            break
+
+        case 'album': 
+            if (results && 'albums' in results) {
+                items = results.albums.items
+            }
+            break
+
+        case 'playlist': 
+            if (results && 'playlists' in results) {
+                items = results.playlists.items
+            }
+            break
+    }
 
     {
         items.map((item, index) => {
