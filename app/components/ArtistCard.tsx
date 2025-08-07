@@ -21,7 +21,7 @@ export default function ArtistCard({name, imageUrl, followers, genre, date, albu
         <div className={`flex flex-col self-center border border-(--accent) hover:border-(--secondary) cursor-grabbing p-4 text-start rounded-2xl relative w-[140px] h-[450px] flex-1 hover:flex-[3] transition-all duration-300`}>
             <div className='z-10'>
                 <p>{name}</p>
-                <p>{`${followers ? followers : 'Unknown amount of'} listeners`}</p>
+                <p>{`${followers ?? 'Unknown amount of'} listeners`}</p>
                 <p>{capatilize(genre ?? '')}</p>
                 <p>{date}</p>
                 <p>{album}</p>
@@ -29,7 +29,7 @@ export default function ArtistCard({name, imageUrl, followers, genre, date, albu
                 <p>{playlistOwner}</p>
                 <a className='font-bold' href={externalUrl} target='_blank'>Press to see playlist</a>
             </div>
-            <Image src={imageUrl.length ? imageUrl : '/rapper.jpg'} fill className='object-cover rounded-2xl' sizes='300px' alt="Rapper on stage" />
+            <Image src={imageUrl ?? '/rapper.jpg'} fill className='object-cover rounded-2xl' sizes='300px' alt="Rapper on stage" />
         </div>
     )
 }
