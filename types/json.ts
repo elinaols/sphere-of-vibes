@@ -119,6 +119,6 @@ export type SpotifyResultsData =
     | {artists: SpotifyArtists}
     | {tracks: SpotifyTracks} 
     | {albums: SpotifyAlbums}  
-    | {playlists: SpotifyTracks} 
+    | {playlists: SpotifyPlaylists} 
 
 export type SpotifySearchType = 'artist' | 'track' | 'album' | 'playlist'
