@@ -44,7 +44,7 @@ type TrackAlbum = {
     id: string,
     images: SpotifyImages[],
     name: string,
-    release_date: string,
+    release_date?: string,
     href: string
 }
 
