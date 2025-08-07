@@ -60,8 +60,9 @@ export default function SpotifyResults({results, type}: Props) {
 		console.log(item, index)
 		return (
 			<div key={index} className="py-10 px-50 flex w-full justify-center gap-8">
-				{/** Checks every item in the ui */}
-				{JSON.stringify(item)}
+				{/** Checks every item in the ui 
+                    JSON.stringify(item)*/
+                }
                 {type === 'artist' &&
                     <ArtistCard
                         name={item.name}
