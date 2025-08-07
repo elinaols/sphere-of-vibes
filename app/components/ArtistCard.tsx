@@ -2,10 +2,16 @@ import React from 'react'
 import Image from 'next/image'
 
 interface ArtistProps {
-    name?: string,
-    /*imageURL: string,
-    track: string,
-    album: string*/
+    name: string,
+    imageURL: string,
+    followers?: number,
+    genre?: string,
+    date?: string,
+    album?: string,
+    artistName?: string,
+    releaseDateAlbum?: string,
+    playlistOwner?: string,
+    externalUrl?: string,
 }
 
 export default function ArtistCard({name}: ArtistProps) {

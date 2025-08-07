@@ -55,7 +55,7 @@ type TrackArtist = {
 
 export type SpotifyItemsTracks = {
     album: TrackAlbum,
-    artists: TrackArtist[],
+    artists: TrackArtist,
     disc_number: number,
     duration_ms: number,
     explicit: false,
@@ -95,9 +95,11 @@ export type SpotifyAlbums = {
 
 type SpotifyPlaylistOwner = {
     href: string
+    display_name: string,
 }
 
 export type SpotifyItemsPlayLists = {
+    external_urls: SpotifyUrl,
     images: SpotifyImages[],
     name: string,
     owner: SpotifyPlaylistOwner
