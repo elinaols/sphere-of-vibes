@@ -59,43 +59,45 @@ export default function SpotifyResults({results, type}: Props) {
 	return items.map((item, index) => {
 		console.log(item, index)
 		return (
-			<div key={index} className="py-10 px-50 flex w-full justify-center flex-col gap-8">
-				{/** Checks every item in the ui 
-                    JSON.stringify(item)*/
-                }
-                {type === 'artist' &&
-                    <ArtistCard
-                        name={item.name}
-                        imageUrl={item.images && item.images.length > 0 ? item.images[0].url : "/rapper.jpg"}
-                        followers={(item as SpotifyItemsArtists).followers.total}
-                        genre={(item as SpotifyItemsArtists).genres[0]}
-                    />
-                }
-                {type === 'track' &&
-                    <ArtistCard
-                        name={item.name}
-                        imageUrl={(item as SpotifyItemsTracks).album.images && (item as SpotifyItemsTracks).album.images.length > 0 ? (item as SpotifyItemsTracks).album.images[0].url : "/rapper.jpg"}
-                        date={(item as SpotifyItemsTracks).album.release_date}
-                        album={(item as SpotifyItemsTracks).album.name}
-                    />
-                }
-                {type === 'album' &&
-                    <ArtistCard
-                        name={item.name}
-                        imageUrl={item.images && item.images.length > 0 ? item.images[0].url : "/rapper.jpg"}
-                        artistName={(item as SpotifyItemsTracks).artists.name}
-                        date={(item as SpotifyItemsTracks).release_date}
-                    />
-                }
-                {type === 'playlist' &&
-                    <ArtistCard
-                        name={item.name}
-                        imageUrl={item.images && item.images.length > 0 ? item.images[0].url : "/rapper.jpg"}
-                        playlistOwner={(item as SpotifyItemsPlayLists).owner.display_name}
-                        externalUrl={(item as SpotifyItemsPlayLists).external_urls.spotify}
-                    />
-                }
-			</div>
+            <div className="flex flex-col">
+                <div key={index} className="py-10 px-50 flex w-full justify-center gap-8">
+                    {/** Checks every item in the ui 
+                        JSON.stringify(item)*/
+                    }
+                    {type === 'artist' &&
+                        <ArtistCard
+                            name={item.name}
+                            imageUrl={item.images && item.images.length > 0 ? item.images[0].url : "/rapper.jpg"}
+                            followers={(item as SpotifyItemsArtists).followers.total}
+                            genre={(item as SpotifyItemsArtists).genres[0]}
+                        />
+                    }
+                    {type === 'track' &&
+                        <ArtistCard
+                            name={item.name}
+                            imageUrl={(item as SpotifyItemsTracks).album.images && (item as SpotifyItemsTracks).album.images.length > 0 ? (item as SpotifyItemsTracks).album.images[0].url : "/rapper.jpg"}
+                            date={(item as SpotifyItemsTracks).album.release_date}
+                            album={(item as SpotifyItemsTracks).album.name}
+                        />
+                    }
+                    {type === 'album' &&
+                        <ArtistCard
+                            name={item.name}
+                            imageUrl={item.images && item.images.length > 0 ? item.images[0].url : "/rapper.jpg"}
+                            artistName={(item as SpotifyItemsTracks).artists.name}
+                            date={(item as SpotifyItemsTracks).release_date}
+                        />
+                    }
+                    {type === 'playlist' &&
+                        <ArtistCard
+                            name={item.name}
+                            imageUrl={item.images && item.images.length > 0 ? item.images[0].url : "/rapper.jpg"}
+                            playlistOwner={(item as SpotifyItemsPlayLists).owner.display_name}
+                            externalUrl={(item as SpotifyItemsPlayLists).external_urls.spotify}
+                        />
+                    }
+                </div>
+            </div>
 		)
 	})
 }
