@@ -20,6 +20,9 @@ export default function SpotifyResults ({results, type}: Props) {
 
     let items: (SpotifyItemsArtists | SpotifyItemsTracks | SpotifyItemsPlayLists)[] = []
 
+    // Filter out item if it's value is null
+    items = items.filter(item => item !== null)
+
     switch (type) {
         case 'artist': 
             if (results && 'artists' in results) {
