@@ -67,7 +67,7 @@ export type SpotifyItemsTracks = {
     type: string,
     uri: string,
     images?: SpotifyImages[],
-    release_date?: string,
+    release_date: string,
 }
 
 export type SpotifyTracks = {
