@@ -65,7 +65,7 @@ export default function SpotifyResults({results, type}: Props) {
                 {type === 'artist' &&
                     <ArtistCard
                         name={item.name}
-                        imageURL={item.images && item.images.length > 0 ? item.images[0].url : "/rapper.jpg"}
+                        imageUrl={item.images && item.images.length > 0 ? item.images[0].url : "/rapper.jpg"}
                         followers={(item as SpotifyItemsArtists).followers.total}
                         genre={(item as SpotifyItemsArtists).genres[0]}
                     />
@@ -73,7 +73,7 @@ export default function SpotifyResults({results, type}: Props) {
                 {type === 'track' &&
                     <ArtistCard
                         name={item.name}
-                        imageURL={item.images && item.images.length > 0 ? item.images[0].url : "/rapper.jpg"}
+                        imageUrl={item.images && item.images.length > 0 ? item.images[0].url : "/rapper.jpg"}
                         date={(item as SpotifyItemsTracks).album.release_date}
                         album={(item as SpotifyItemsTracks).album.name}
                     />
@@ -81,7 +81,7 @@ export default function SpotifyResults({results, type}: Props) {
                 {type === 'album' &&
                     <ArtistCard
                         name={item.name}
-                        imageURL={item.images && item.images.length > 0 ? item.images[0].url : "/rapper.jpg"}
+                        imageUrl={item.images && item.images.length > 0 ? item.images[0].url : "/rapper.jpg"}
                         artistName={(item as SpotifyItemsTracks).artists.name}
                         date={(item as SpotifyItemsTracks).album.release_date}
                     />
@@ -89,7 +89,7 @@ export default function SpotifyResults({results, type}: Props) {
                 {type === 'playlist' &&
                     <ArtistCard
                         name={item.name}
-                        imageURL={item.images && item.images.length > 0 ? item.images[0].url : "/rapper.jpg"}
+                        imageUrl={item.images && item.images.length > 0 ? item.images[0].url : "/rapper.jpg"}
                         playlistOwner={(item as SpotifyItemsPlayLists).owner.display_name}
                         externalUrl={(item as SpotifyItemsPlayLists).external_urls.spotify}
                     />
