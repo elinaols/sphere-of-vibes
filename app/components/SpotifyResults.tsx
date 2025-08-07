@@ -73,7 +73,7 @@ export default function SpotifyResults({results, type}: Props) {
                 {type === 'track' &&
                     <ArtistCard
                         name={item.name}
-                        imageUrl={item.images && item.images.length > 0 ? item.images[0].url : "/rapper.jpg"}
+                        imageUrl={(item as SpotifyItemsTracks).album.images && (item as SpotifyItemsTracks).album.images.length > 0 ? (item as SpotifyItemsTracks).album.images[0].url : "/rapper.jpg"}
                         date={(item as SpotifyItemsTracks).album.release_date}
                         album={(item as SpotifyItemsTracks).album.name}
                     />
