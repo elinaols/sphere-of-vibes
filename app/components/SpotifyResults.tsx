@@ -59,7 +59,7 @@ export default function SpotifyResults({results, type}: Props) {
 	return items.map((item, index) => {
 		console.log(item, index)
 		return (
-			<div key={index} className="py-10 px-50 flex w-full justify-center gap-8">
+			<div key={index} className="py-10 px-50 flex w-full justify-center flex-col gap-8">
 				{/** Checks every item in the ui 
                     JSON.stringify(item)*/
                 }
