@@ -49,10 +49,11 @@ export default function SpotifyResults ({results, type}: Props) {
     {
         items.map((item, index) => {
             console.log(item, index)
+            let name: string
             return (
                 <div key={index} className="py-10 px-50 flex w-full justify-center gap-8">
                     {JSON.stringify(item)}
-                    <ArtistCard/>
+                    <ArtistCard name={item.name}/>
                 </div>
             )})
 }}
