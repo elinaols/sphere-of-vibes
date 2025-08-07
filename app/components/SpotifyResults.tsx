@@ -20,34 +20,34 @@ export default function SpotifyResults ({results, type}: Props) {
 
     let items: (SpotifyItemsArtists | SpotifyItemsTracks | SpotifyItemsPlayLists)[] = []
 
-    // Filter out item if it's value is null
-    items = items.filter(item => item !== null)
-
     switch (type) {
         case 'artist': 
-            if (results && 'artists' in results) {
+        if (results && 'artists' in results) {
                 items = results.artists.items
             }
             break
-
-        case 'track': 
+            
+            case 'track': 
             if (results && 'tracks' in results) {
                 items = results.tracks.items
             }
             break
 
         case 'album': 
-            if (results && 'albums' in results) {
-                items = results.albums.items
-            }
-            break
-
+        if (results && 'albums' in results) {
+            items = results.albums.items
+        }
+        break
+        
         case 'playlist': 
-            if (results && 'playlists' in results) {
-                items = results.playlists.items
-            }
-            break
+        if (results && 'playlists' in results) {
+            items = results.playlists.items
+        }
+        break
     }
+    
+    // Filter out item if it's value is null
+    items = items.filter(item => item !== null)
 
     return (
         items.map((item, index) => {
