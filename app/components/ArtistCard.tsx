@@ -19,7 +19,7 @@ export default function ArtistCard({name, imageUrl, followers, genre, date, albu
     
     return (
         <div className={`flex flex-col self-center border border-(--accent) hover:border-(--secondary) cursor-grabbing p-4 text-start rounded-2xl relative w-[140px] h-[450px] flex-1 hover:flex-[3] transition-all duration-300`}>
-            <div className='z-10 bg-[--accent]/30 backdrop-invert backdrop-opacity-10 rounded-2xl p-2'>
+            <div className='z-10 bg-[#532ec5]/30 backdrop-invert backdrop-opacity-10 rounded-2xl p-2'>
                 <p>{name}</p>
                 <p>{`${followers ?? 'Unknown amount of'} listeners`}</p>
                 <p>{capatilize(genre ?? '')}</p>
