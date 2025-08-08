@@ -69,6 +69,7 @@ export default function SpotifyResults({results, type}: Props) {
                         imageUrl={item.images && item.images.length > 0 ? item.images[0].url : "/rapper.jpg"}
                         followers={(item as SpotifyItemsArtists).followers.total}
                         genre={(item as SpotifyItemsArtists).genres[0]}
+                        externalUrl={(item as SpotifyItemsArtists).external_urls.spotify}
                     />
                 }
                 {type === 'track' &&
@@ -77,6 +78,7 @@ export default function SpotifyResults({results, type}: Props) {
                         imageUrl={(item as SpotifyItemsTracks).album.images && (item as SpotifyItemsTracks).album.images.length > 0 ? (item as SpotifyItemsTracks).album.images[0].url : "/rapper.jpg"}
                         date={(item as SpotifyItemsTracks).album.release_date}
                         album={(item as SpotifyItemsTracks).album.name}
+                        externalUrl={(item as SpotifyItemsTracks).external_urls.spotify}
                     />
                 }
                 {type === 'album' &&
@@ -85,6 +87,7 @@ export default function SpotifyResults({results, type}: Props) {
                         imageUrl={item.images && item.images.length > 0 ? item.images[0].url : "/rapper.jpg"}
                         artistName={(item as SpotifyItemsTracks).artists.name}
                         date={(item as SpotifyItemsTracks).release_date}
+                        externalUrl={(item as SpotifyItemsTracks).external_urls.spotify}
                     />
                 }
                 {type === 'playlist' &&
