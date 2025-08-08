@@ -27,7 +27,7 @@ export default function ArtistCard({name, imageUrl, followers, genre, date, albu
                 <p>{album}</p>
                 <p>{artistName}</p>
                 <p>{playlistOwner}</p>
-                <a className='font-bold' href={externalUrl} target='_blank'>Press to see playlist</a>
+                {externalUrl && <a className='font-bold' href={externalUrl} target='_blank'>Press to see playlist</a>}
             </div>
             <Image src={imageUrl ?? '/rapper.jpg'} fill className='object-cover rounded-2xl' sizes='300px' alt="Rapper on stage" />
         </div>
