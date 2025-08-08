@@ -60,9 +60,6 @@ export default function SpotifyResults({results, type}: Props) {
 		console.log(item, index)
 		return (
 			<>
-				{/** Checks every item in the ui 
-                    JSON.stringify(item)*/
-                }
                 {type === 'artist' &&
                     <ArtistCard
                         name={item.name}
