@@ -12,7 +12,7 @@ export default function Home() {
   const [darkMode, setDarkMode] = useState(false)
 
   return (
-    // from-(--white) används när knappen om mörkt/ljust läge har togglats
+    // TODO: Fix the responsive design
     <div className={`box-border min-h-screen p-0 m-0  flex flex-col bg-linear-200/shorter ${darkMode ? 'from-(--white)' : 'from-(--black)'} to-(--purple)`}>
       <Header darkMode={darkMode} setDarkMode={setDarkMode} size="text-lg"/>
       <main className="basis-3/4 flex justify-center text-center flex-col">

@@ -67,9 +67,10 @@ export default function SpotifyResults({results, type}: Props) {
 				}
 
 				// Adding extra props depending on the item type
-				if ("followers" in item && type === 'artist') {
+				if (type === 'artist') {
 					// Artist
-					props.followers = item.followers.total
+					const artistItem = item as SpotifyItemsArtists
+					props.followers = artistItem.followers.total
 					props.genre = "genres" in item ? item.genres[0] : "Unknown genre"
 				} else if ("album" in item) {
 					// Album/Track
