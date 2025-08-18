@@ -42,9 +42,10 @@ export default function SearchOnSpotify({setResults, setType}: Props) {
                 <input
                     name="query"
                     type="text"
+                    aria-label="Sök"
                     className="border border-(--secondary) hover:border-(--accent) rounded-2xl p-6 min-w-[500px]"
                 />
-                <select name="type" defaultValue="artist" className={`${disable} font-bold hover:bg-(--accent) text-start bg-(--secondary) rounded-2xl p-6 appearance-none bg-[url(/arrow-down.png)] bg-no-repeat bg-[right_0.3rem_center]`} >
+                <select aria-label="Välj typ av sökning" name="type" defaultValue="artist" className={`${disable} font-bold hover:bg-(--accent) text-start bg-(--secondary) rounded-2xl p-6 appearance-none bg-[url(/arrow-down.png)] bg-no-repeat bg-[right_0.3rem_center]`} >
                     <option value="artist">Artist</option>
                     <option value="track">Låt</option>
                     <option value="album">Album</option>
