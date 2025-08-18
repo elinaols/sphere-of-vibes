@@ -7,7 +7,7 @@ import {
 	SpotifyItemsArtists,
 	SpotifyItemsPlayLists,
 } from "../../types/json"
-import { ArtistProps } from "@/types/artistCardProps"
+import {ArtistProps} from "@/types/artistCardProps"
 
 type Props = {
 	// Using a built-in TS-utility to type an object with dynamic string keys and values of various types
@@ -27,7 +27,7 @@ export default function SpotifyResults({results, type}: Props) {
 
 	let items: (SpotifyItemsArtists | SpotifyItemsTracks | SpotifyItemsPlayLists)[] = []
 
-    // TODO: Refactor to eliminate repetive code
+	// TODO: Refactor to eliminate repetive code
 
 	// Sets items based on the searched type and available results
 	switch (type) {
@@ -55,60 +55,37 @@ export default function SpotifyResults({results, type}: Props) {
 		<>
 			{items.map((item, index) => {
 				console.log(item, index)
+
 				const props: ArtistProps = {
 					name: item.name,
-					imageUrl: "images" in item && item.images?.length ? item.images[0].url : "/rapper.jpg", // Checks if it's an empty array or not
-					externalUrl: item.external_urls?.spotify
-			}
-			if ("followers" in item) {
-				// Artist
-				props.followers = item.followers.total
-				props.genre = item.genres[0]
-			} else if ("album" in item) {
-				// Album/Track
-				props.imageUrl = "images" in item && item.images?.length ? item.album.images[0].url : "/rapper.jpg" // Checks if it's an empty array or not
-				props.album = item.album.name
-				props.date = item.album.release_date
-				props.artistName = item.artists.name
-			} else if ("owner" in item) {
-				// Playlist
-				props.playlistOwner = item.owner.display_name
-			}
-				return <ArtistCard key={index} {...props}/>
-				{/*<ArtistCard
-					name={item.name}
-					imageUrl={item.images && item.images.length > 0 ? imageUrl : "/rapper.jpg"}
-					followers={(item as SpotifyItemsArtists).followers.total}
-					genre={(item as SpotifyItemsArtists).genres[0]}
-					externalUrl={(item as SpotifyItemsArtists).external_urls.spotify}
-				/>*/}
+					// Determines the correct image based on the item type
+					imageUrl:
+						"images" in item && item.images?.length
+							? item.images[0].url
+							: "album" in item && item.album?.images?.length
+							? item.album?.images[0].url
+							: "/rapper.jpg", // Checks if it's an empty array or not
+					externalUrl: item.external_urls?.spotify,
+				}
+
+				// Adding extra props depending on the item type
+				if ("followers" in item) {
+					// Artist
+					props.followers = item.followers.total
+					props.genre = "genres" in item ? item.genres[0] : "Unknown genre"
+				} else if ("album" in item) {
+					// Album/Track
+					props.album = item.album.name
+					props.date = item.album.release_date
+					props.artistName = item.artists.name
+				} else if ("owner" in item) {
+					// Playlist
+					props.playlistOwner = item.owner.display_name
+				}
+
+				// Spreads the props so ArtistCard can recieve all necessary props
+				return <ArtistCard key={index} {...props} />
 			})}
-			{/*{type === 'track' &&
-				<ArtistCard
-					name={item.name}
-					imageUrl={(item as SpotifyItemsTracks).album.images && (item as SpotifyItemsTracks).album.images.length > 0 ? (item as SpotifyItemsTracks).album.images[0].url : "/rapper.jpg"}
-					date={(item as SpotifyItemsTracks).album.release_date}
-					album={(item as SpotifyItemsTracks).album.name}
-					externalUrl={(item as SpotifyItemsTracks).external_urls.spotify}
-				/>
-			}
-			{type === 'album' &&
-				<ArtistCard
-					name={item.name}
-					imageUrl={item.images && item.images.length > 0 ? item.images[0].url : "/rapper.jpg"}
-					artistName={(item as SpotifyItemsTracks).artists.name}
-					date={(item as SpotifyItemsTracks).release_date}
-					externalUrl={(item as SpotifyItemsTracks).external_urls.spotify}
-				/>
-			}
-			{type === 'playlist' &&
-				<ArtistCard
-					name={item.name}
-					imageUrl={item.images && item.images.length > 0 ? item.images[0].url : "/rapper.jpg"}
-					playlistOwner={(item as SpotifyItemsPlayLists).owner.display_name}
-					externalUrl={(item as SpotifyItemsPlayLists).external_urls.spotify}
-				/>
-			}*/}
 		</>
 	)
 }

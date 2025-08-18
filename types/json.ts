@@ -41,6 +41,7 @@ export type SpotifyArtists = {
 // TRACKS
 
 type TrackAlbum = {
+	length: boolean
     id: string,
     images: SpotifyImages[],
     name: string,
