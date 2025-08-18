@@ -75,7 +75,10 @@ export default function SpotifyResults({results, type}: Props) {
 				} else if ("album" in item) {
 					// Album/Track
 					props.album = item.album.name
-					props.date = type === "track" ? item.album.release_date : item.release_date
+					if (type === "track") {
+						props.date = item.album.release_date
+					}
+					props.date = item.release_date
 					props.artistName = item.artists.name
 				} else if ("owner" in item) {
 					// Playlist
