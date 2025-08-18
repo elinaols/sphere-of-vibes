@@ -1,17 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-
-interface ArtistProps {
-    name: string,
-    imageUrl: string,
-    followers?: number,
-    genre?: string,
-    date?: string,
-    album?: string,
-    artistName?: string,
-    playlistOwner?: string,
-    externalUrl?: string,
-}
+import { ArtistProps } from '@/types/artistCardProps'
 
 export default function ArtistCard({name, imageUrl, followers, genre, date, album, artistName, playlistOwner, externalUrl}: ArtistProps) {
     const capatilize = (str: string): string => 
@@ -29,6 +18,7 @@ export default function ArtistCard({name, imageUrl, followers, genre, date, albu
                 <p>{playlistOwner}</p>
                 <a className='font-bold' href={externalUrl} target='_blank'>Press to see more</a>
             </div>
+            {/* Change: use <img> instead of <Image> to support fallback if imageUrl fails to load (onError) */}
             <Image src={imageUrl ?? '/rapper.jpg'} fill className='object-cover rounded-2xl' sizes='300px' alt="Rapper on stage" />
         </div>
     )

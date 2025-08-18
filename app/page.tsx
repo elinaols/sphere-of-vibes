@@ -11,6 +11,7 @@ export default function Home() {
   const [type, setType] = useState<SpotifySearchType>('artist')
 
   return (
+    // from-(--white) används när knappen om mörkt/ljust läge har togglats
     <div className="box-border min-h-screen p-0 m-0 bg-linear-200/shorter from-(--black) to-(--purple) flex flex-col">
       <Header size="text-lg"/>
       <main className="basis-3/4 flex justify-center text-center flex-col">
