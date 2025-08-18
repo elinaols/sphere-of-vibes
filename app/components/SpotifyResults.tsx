@@ -27,8 +27,6 @@ export default function SpotifyResults({results, type}: Props) {
 
 	let items: (SpotifyItemsArtists | SpotifyItemsTracks | SpotifyItemsPlayLists)[] = []
 
-	// TODO: Refactor to eliminate repetive code
-
 	// Sets items based on the searched type and available results
 	switch (type) {
 		case "artist":

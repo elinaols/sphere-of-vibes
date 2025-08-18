@@ -1,9 +1,12 @@
 'use client'
-import React, {useState} from 'react'
+import React from 'react'
 
-export const Button = () => {
-    const [darkMode, setDarkMode] = useState<boolean>(false)
+type Props = {
+    darkMode: boolean,
+    setDarkMode: React.Dispatch<React.SetStateAction<boolean>>
+}
 
+export const Button = ({setDarkMode, darkMode}: Props) => {
     return (
         // onClick: Toggles the state value based on the previous state value. If true, the opposite (false) will be set as the new value (and vice versa)
         <button 

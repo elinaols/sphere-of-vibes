@@ -8,6 +8,7 @@
   --purple: #4e0d79;
   --hover: #1f0b5c;
   --text-color: #fdf8f8;
+  --white: #fff
 }
 
 @media (prefers-color-scheme: dark) {
