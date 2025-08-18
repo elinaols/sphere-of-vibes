@@ -72,10 +72,15 @@ export default function SpotifyResults({results, type}: Props) {
 					const artistItem = item as SpotifyItemsArtists
 					props.followers = artistItem.followers.total
 					props.genre = "genres" in item ? item.genres[0] : "Unknown genre"
+				} else if (type === "album" && "release_date" in item) {
+					// Album
+					props.album = item.album.name
+				} else if (type === "track" && "album" in item && "release_date" in item.album) {
+					// Track
+					props.date = item.album.release_date
 				} else if ("album" in item) {
 					// Album/Track
-					props.album = item.album.name
-					props.date = item.album.release_date
+					props.date = item.release_date
 					props.artistName = item.artists.name
 				} else if ("owner" in item) {
 					// Playlist
