@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   images: {
     // Allow external image from Spotifys domains (Enables loading optimized images)
-    domains: ['i.scdn.co', 'mosaic.scdn.co']
+    domains: ['i.scdn.co', 'mosaic.scdn.co', 'image-cdn-ak.spotifycdn.com']
   }
 };
 
