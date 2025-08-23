@@ -1,5 +1,5 @@
 "use client"
-import React, { FormEvent, useEffect, useState } from "react"
+import React, { FormEvent, useState } from "react"
 import {useSession} from "next-auth/react"
 import { SpotifyResultsData, SpotifySearchType } from "@/types/json"
 import PopUp from "./PopUp"
