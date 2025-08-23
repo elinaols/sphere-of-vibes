@@ -53,7 +53,7 @@ export default function SearchOnSpotify({setResults, setType}: Props) {
 
 	return (
         <>
-            <form onSubmit={onSubmit} className="flex flex-col sm:flex-row justify-center gap-4 pb-4 pt-10 px-2 sm:px-0 w-[90%] self-center">
+            <form onSubmit={onSubmit} className="text-(--text-color) flex flex-col sm:flex-row justify-center gap-4 pb-4 pt-10 px-2 sm:px-0 w-[90%] self-center">
                 <input
                     name="query"
                     type="text"
