@@ -61,13 +61,13 @@ export default function SearchOnSpotify({setResults, setType}: Props) {
 					name="query"
 					type="text"
 					aria-label="Sök"
-					className="text-(--text-color) border border-(--secondary) hover:border-(--accent) rounded-2xl w-full sm:w-[50%] p-3 md:p-4 lg:p-6"
+					className="border border-(--secondary) hover:border-(--accent) rounded-2xl w-full sm:w-[50%] p-3 md:p-4 lg:p-6"
 				/>
 				<select
 					aria-label="Välj typ av sökning"
 					name="type"
 					defaultValue="artist"
-					className={`${disable} font-bold hover:bg-(--accent) text-center sm:text-start bg-(--secondary) rounded-2xl p-3 md:p-4 lg:p-6 appearance-none bg-[url(/arrow-down.png)] bg-no-repeat bg-[right_0.3rem_center]`}>
+					className={`${disable} text-(--text-color) font-bold hover:bg-(--accent) text-center sm:text-start bg-(--secondary) rounded-2xl p-3 md:p-4 lg:p-6 appearance-none bg-[url(/arrow-down.png)] bg-no-repeat bg-[right_0.3rem_center]`}>
 					<option value="artist">Artist</option>
 					<option value="track">Låt</option>
 					<option value="album">Album</option>
@@ -75,7 +75,7 @@ export default function SearchOnSpotify({setResults, setType}: Props) {
 				</select>
 				<button
 					type="submit"
-					className={`${disable} cursor-grab font-bold hover:bg-(--accent) bg-(--secondary) hover:scale-102 rounded-2xl p-3 md:p-4 lg:p-6`}
+					className={`${disable} text-(--text-color) cursor-grab font-bold hover:bg-(--accent) bg-(--secondary) hover:scale-102 rounded-2xl p-3 md:p-4 lg:p-6`}
 					onClick={handleClick}>
 					Sök
 				</button>
