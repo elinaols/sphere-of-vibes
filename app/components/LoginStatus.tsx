@@ -11,14 +11,14 @@ export default function LoginStatus({darkMode}: Props) {
     
     if (session) {
         return (
-            <div className={`flex justify-center p-2 ${darkMode ? 'text-(--accent)' : 'text-(--text-color)'}`}>
+            <div className={`flex flex-col sm:flex-row justify-center p-2 ${darkMode ? 'text-(--accent)' : 'text-(--text-color)'}`}>
                 <p className='pe-3'>Inloggad som <span className='font-bold'>{session.user?.email}</span></p>
                 <button className='font-bold px-2 border cursor-grab rounded-lg hover:bg-(--accent)' onClick={() => signOut()}>Logga ut</button>
             </div>
         )
     } else {
         return (
-            <div className={`flex justify-center p-2 ${darkMode ? 'text-(--accent)' : 'text-(--text-color)'}`}>
+            <div className={`flex flex-col sm:flex-row justify-center p-2 ${darkMode ? 'text-(--accent)' : 'text-(--text-color)'}`}>
                 <p className='pe-3'>Inte inloggad</p>
                 <button className='font-bold px-2 border cursor-grab rounded-lg hover:bg-(--accent)' onClick={() => signIn('spotify')}>Logga in med Spotify</button>
             </div>

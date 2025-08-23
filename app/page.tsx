@@ -18,7 +18,7 @@ export default function Home() {
       <main className="basis-3/4 flex justify-center text-center flex-col flex-1">
         <SearchOnSpotify setResults={setResults} setType={setType}/>
         <LoginStatus darkMode={darkMode}/>
-        <section className="py-10 px-50 flex justify-center flex-wrap gap-8">
+        <section className="py-10 px-30 lg:px-50 flex justify-center flex-wrap gap-8">
           <SpotifyResults results={results} type={type}/>
         </section>
       </main>
