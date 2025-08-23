@@ -13,9 +13,9 @@ export default function Home() {
 
   return (
     // TODO: Fix the responsive design
-    <div className={`flex flex-col bg-linear-200/shorter ${darkMode ? 'from-(--white)' : 'from-(--black)'} to-(--purple)`}>
+    <div className={`flex flex-col min-h-screen bg-linear-200/shorter ${darkMode ? 'from-(--white)' : 'from-(--black)'} to-(--purple)`}>
       <Header darkMode={darkMode} setDarkMode={setDarkMode} size="text-md lg:text-lg"/>
-      <main className="basis-3/4 flex justify-center text-center flex-col flex-1">
+      <main className="flex text-center flex-col flex-1">
         <SearchOnSpotify setResults={setResults} setType={setType}/>
         <LoginStatus darkMode={darkMode}/>
         <section className="py-10 px-10 sm:px-20 md:px-30 lg:px-50 flex justify-center flex-wrap gap-8">
