@@ -21,7 +21,7 @@ export default function SearchOnSpotify({setResults, setType}: Props) {
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         if(!session) {
             e.preventDefault()
-            setPopUpMessage("You need to log in!")
+            setPopUpMessage("Logga in först!")
         }
     }
 
@@ -36,7 +36,7 @@ export default function SearchOnSpotify({setResults, setType}: Props) {
             if (typeof type === 'string') setType(type as SpotifySearchType)
 
             if (!query) {
-                setPopUpMessage('No query provided')
+                setPopUpMessage('Fyll i sökfältet')
                 return
             } 
     
@@ -68,7 +68,7 @@ export default function SearchOnSpotify({setResults, setType}: Props) {
                 </select>
                 <button
                     type="submit"
-                    className={`cursor-grab font-bold hover:bg-(--accent) bg-(--secondary) hover:scale-102 rounded-2xl p-3 md:p-4 lg:p-6`}
+                    className={`${disable} cursor-grab font-bold hover:bg-(--accent) bg-(--secondary) hover:scale-102 rounded-2xl p-3 md:p-4 lg:p-6`}
                     onClick={handleClick}
                 >
                     Sök
