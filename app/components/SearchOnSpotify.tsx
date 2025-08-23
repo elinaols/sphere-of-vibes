@@ -11,6 +11,7 @@ type Props = {
 }
 
 export default function SearchOnSpotify({setResults, setType}: Props) {
+    const [inputValue, setInputValue] = useState('')
 	const {data: session} = useSession()
 
 	const disable = session ? "cursor-grab" : "cursor-not-allowed"
@@ -49,7 +50,9 @@ export default function SearchOnSpotify({setResults, setType}: Props) {
 			setResults(data)
 		} catch (error) {
 			console.error("Error while fetching data", error)
-		}
+		} finally {
+            setInputValue('')
+        }
 	}
 
 	return (
@@ -60,6 +63,8 @@ export default function SearchOnSpotify({setResults, setType}: Props) {
 				<input
 					name="query"
 					type="text"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
 					aria-label="Sök"
 					className="border border-(--secondary) hover:border-(--accent) rounded-2xl w-full sm:w-[50%] p-3 md:p-4 lg:p-6"
 				/>
