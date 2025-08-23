@@ -10,9 +10,9 @@ type Props = {
 export default function Header({size, setDarkMode, darkMode}: Props) {
     return (
         <>
-        <div className='flex pt-5 px-5'>
-            <h1 className={`flex-grow text-center ${darkMode ? "text-(--accent)" : "text-(--text-color)"}`}>sphere of vibes</h1>
-            <div className={`justify-center ${size}`}>
+        <div className='flex flex-col-reverse sm:flex-row p-3 lg:p-4'>
+            <h1 className={`font-semibold flex-grow italic text-5xl sm:text-6xl md:text-[75px] lg:text-[100px] xl:text-9xl text-center ${darkMode ? "text-(--accent)" : "text-(--text-color)"}`}>sphere of vibes</h1>
+            <div className={`self-end sm:self-start pb-4 sm:pb-0 sm:justify-center ${size}`}>
                 <Button setDarkMode={setDarkMode} darkMode={darkMode} />
             </div>
         </div>

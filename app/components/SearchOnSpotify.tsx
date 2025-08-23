@@ -3,6 +3,7 @@ import React, { FormEvent } from "react"
 import {useSession} from "next-auth/react"
 import { SpotifyResultsData, SpotifySearchType } from "@/types/json"
 
+// TODO: Code comments is missing
 type Props = {
     setResults: (results: SpotifyResultsData) => void
     setType: (type: SpotifySearchType) => void
@@ -38,14 +39,14 @@ export default function SearchOnSpotify({setResults, setType}: Props) {
 
 	return (
         <>
-            <form onSubmit={onSubmit} className="flex justify-center gap-4 pb-4 pt-10">
+            <form onSubmit={onSubmit} className="flex flex-col sm:flex-row justify-center gap-4 pb-4 pt-10 px-2 sm:px-0 w-[90%] self-center">
                 <input
                     name="query"
                     type="text"
                     aria-label="Sök"
-                    className="border border-(--secondary) hover:border-(--accent) rounded-2xl p-6 min-w-[500px]"
+                    className="border border-(--secondary) hover:border-(--accent) rounded-2xl w-full sm:w-[50%] p-3 md:p-4 lg:p-6"
                 />
-                <select aria-label="Välj typ av sökning" name="type" defaultValue="artist" className={`${disable} font-bold hover:bg-(--accent) text-start bg-(--secondary) rounded-2xl p-6 appearance-none bg-[url(/arrow-down.png)] bg-no-repeat bg-[right_0.3rem_center]`} >
+                <select aria-label="Välj typ av sökning" name="type" defaultValue="artist" className={`${disable} font-bold hover:bg-(--accent) text-center sm:text-start bg-(--secondary) rounded-2xl p-3 md:p-4 lg:p-6 appearance-none bg-[url(/arrow-down.png)] bg-no-repeat bg-[right_0.3rem_center]`} >
                     <option value="artist">Artist</option>
                     <option value="track">Låt</option>
                     <option value="album">Album</option>
@@ -53,7 +54,7 @@ export default function SearchOnSpotify({setResults, setType}: Props) {
                 </select>
                 <button
                     type="submit"
-                    className={`${disable} font-bold hover:bg-(--accent) bg-(--secondary) hover:scale-102 rounded-2xl p-6`}
+                    className={`${disable} font-bold hover:bg-(--accent) bg-(--secondary) hover:scale-102 rounded-2xl p-3 md:p-4 lg:p-6`}
                     disabled={!session}>
                     Sök
                 </button>
