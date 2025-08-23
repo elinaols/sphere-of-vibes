@@ -35,7 +35,7 @@ export default function SearchOnSpotify({setResults, setType}: Props) {
 
             if (typeof type === 'string') setType(type as SpotifySearchType)
 
-            if (!query) return console.log("No query provided")
+            if (!query) return <PopUp message="No query provided" onClose={() => setShowPopUp(false)}/>
     
             const response = await fetch(`/api/apiData?query=${encodeURIComponent(query as string)}&type=${encodeURIComponent(type as string)}`)
     
