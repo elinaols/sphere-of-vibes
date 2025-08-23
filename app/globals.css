@@ -9,6 +9,7 @@
   --hover: #1f0b5c;
   --text-color: #fdf8f8;
   --white: #fdfdfd;
+  --popup-white: rgb(255, 255, 255);
 }
 
 @media (prefers-color-scheme: dark) {

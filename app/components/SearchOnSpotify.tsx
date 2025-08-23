@@ -1,7 +1,8 @@
 "use client"
-import React, { FormEvent } from "react"
+import React, { FormEvent, useEffect, useState } from "react"
 import {useSession} from "next-auth/react"
 import { SpotifyResultsData, SpotifySearchType } from "@/types/json"
+import PopUp from "./PopUp"
 
 // TODO: Code comments is missing
 type Props = {
@@ -10,9 +11,19 @@ type Props = {
 }
 
 export default function SearchOnSpotify({setResults, setType}: Props) {
-	const {data: session} = useSession()
+	
+    const {data: session} = useSession()
 
 	const disable = session ? "cursor-grab" : "cursor-not-allowed"
+
+    const [showPopUp, setShowPopUp] = useState(false)
+
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        if(!session) {
+            e.preventDefault()
+            setShowPopUp(true)
+        }
+    }
 
     async function onSubmit(event: FormEvent<HTMLFormElement>) {
         try {
@@ -54,11 +65,13 @@ export default function SearchOnSpotify({setResults, setType}: Props) {
                 </select>
                 <button
                     type="submit"
-                    className={`${disable} font-bold hover:bg-(--accent) bg-(--secondary) hover:scale-102 rounded-2xl p-3 md:p-4 lg:p-6`}
-                    disabled={!session}>
+                    className={`cursor-grab font-bold hover:bg-(--accent) bg-(--secondary) hover:scale-102 rounded-2xl p-3 md:p-4 lg:p-6`}
+                    onClick={handleClick}
+                >
                     Sök
                 </button>
             </form>
+            {showPopUp && <PopUp message="You need to log in!" onClose={() => setShowPopUp(false)}/>}
         </>
 	)
 }
