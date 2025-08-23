@@ -16,12 +16,12 @@ export default function SearchOnSpotify({setResults, setType}: Props) {
 
 	const disable = session ? "cursor-grab" : "cursor-not-allowed"
 
-    const [showPopUp, setShowPopUp] = useState(false)
+    const [popUpMessage, setPopUpMessage] = useState<string | null>(null)
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         if(!session) {
             e.preventDefault()
-            setShowPopUp(true)
+            setPopUpMessage("You need to log in!")
         }
     }
 
@@ -35,7 +35,10 @@ export default function SearchOnSpotify({setResults, setType}: Props) {
 
             if (typeof type === 'string') setType(type as SpotifySearchType)
 
-            if (!query) return <PopUp message="No query provided" onClose={() => setShowPopUp(false)}/>
+            if (!query) {
+                setPopUpMessage('No query provided')
+                return
+            } 
     
             const response = await fetch(`/api/apiData?query=${encodeURIComponent(query as string)}&type=${encodeURIComponent(type as string)}`)
     
@@ -71,7 +74,8 @@ export default function SearchOnSpotify({setResults, setType}: Props) {
                     Sök
                 </button>
             </form>
-            {showPopUp && <PopUp message="You need to log in!" onClose={() => setShowPopUp(false)}/>}
+            {/* popUpMessage will not render when it's null */}
+            {popUpMessage && <PopUp message={popUpMessage} onClose={() => setPopUpMessage(null)}/>}
         </>
 	)
 }
