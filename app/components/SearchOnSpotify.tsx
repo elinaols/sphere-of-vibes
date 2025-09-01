@@ -14,20 +14,26 @@ export default function SearchOnSpotify({setResults, setType}: Props) {
     const [inputValue, setInputValue] = useState('')
 	const {data: session} = useSession()
 
-	const disable = session ? "cursor-grab" : "cursor-not-allowed"
+	const isDisabled = !session?.token?.accessToken
+
+	const disable = isDisabled ? "cursor-not-allowed" : "cursor-grab"
 
 	const [popUpMessage, setPopUpMessage] = useState<string | null>(null)
 
 	const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-		if (!session) {
+		if (isDisabled) {
 			e.preventDefault()
 			setPopUpMessage("Logga in först!")
 		}
 	}
 
 	async function onSubmit(event: FormEvent<HTMLFormElement>) {
-		try {
+		if (isDisabled) {
 			event.preventDefault()
+			setPopUpMessage("Logga in först!")
+		}
+
+		try {
 
 			const formData = new FormData(event.currentTarget)
 			const query = formData.get("query")
