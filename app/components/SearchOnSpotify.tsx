@@ -19,14 +19,14 @@ export default function SearchOnSpotify({setResults, setType}: Props) {
 	const [popUpMessage, setPopUpMessage] = useState<string | null>(null)
 
 	const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-		if (status !== "authenticated" || !session?.token?.accessToken) {
+		if (!session?.token?.accessToken) {
 			e.preventDefault()
 			setPopUpMessage("Logga in först!")
 		}
 	}
 
 	async function onSubmit(event: FormEvent<HTMLFormElement>) {
-		if (status !== "authenticated" || !session?.token?.accessToken) {
+		if (!session?.token?.accessToken) {
 			event.preventDefault()
 			setPopUpMessage("Logga in först!")
 			return
