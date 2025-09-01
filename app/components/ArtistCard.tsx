@@ -29,7 +29,7 @@ export default function ArtistCard({
 				<p>{album}</p>
 				<p>{artistName}</p>
 				<p>{playlistOwner}</p>
-				<p className="font-bold">Press to see more</p>
+				<p className="font-bold">Klicka för att se mer</p>
 			</div>
 			{/* Change: use <img> instead of <Image> to support fallback if imageUrl fails to load (onError) */}
 			<Image

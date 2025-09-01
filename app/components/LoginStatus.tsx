@@ -7,8 +7,10 @@ type Props = {
 }
 
 export default function LoginStatus({darkMode}: Props) {
-    const { data: session } = useSession()
+    const { data: session, status } = useSession()
     
+    if (status === "loading") return <p>Loading...</p>
+
     if (session) {
         return (
             <div className={`flex flex-col sm:flex-row justify-center p-2 ${darkMode ? 'text-(--accent)' : 'text-(--text-color)'}`}>
