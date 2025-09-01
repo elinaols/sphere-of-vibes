@@ -17,7 +17,9 @@ export default function ArtistCard({
 	const capatilize = (str: string): string => (str ? str.charAt(0).toUpperCase() + str.slice(1) : "")
 
 	return (
-		<div
+		<a	
+			href={externalUrl} 
+			target="_blank"
 			className={`flex flex-col self-center border border-(--accent) hover:border-(--secondary) cursor-grab p-4 text-start rounded-2xl relative w-[140px] h-[450px] text-(--text-color) flex-1 hover:flex-[3] transition-all duration-300`}>
 			<div className="z-10 bg-[#532ec5]/30 backdrop-invert backdrop-opacity-10 rounded-2xl p-2">
 				<p>{name}</p>
@@ -27,9 +29,7 @@ export default function ArtistCard({
 				<p>{album}</p>
 				<p>{artistName}</p>
 				<p>{playlistOwner}</p>
-				<a className="font-bold" href={externalUrl} target="_blank">
-					Press to see more
-				</a>
+				<p className="font-bold">Press to see more</p>
 			</div>
 			{/* Change: use <img> instead of <Image> to support fallback if imageUrl fails to load (onError) */}
 			<Image
@@ -39,6 +39,6 @@ export default function ArtistCard({
 				sizes="300px"
 				alt="Rapper on stage"
 			/>
-		</div>
+		</a>
 	)
 }
