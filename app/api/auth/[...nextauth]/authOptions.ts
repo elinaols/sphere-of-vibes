@@ -20,13 +20,15 @@ export const authOptions: NextAuthOptions = ({
             // Checks if it's a new login and saves user account info in the token
             if (account) {
                 token.id = account.id;
-                token.expires_at = account.expires_at;
-                token.accessToken = account.access_token;
+                token.expires_at = account.expiresAt;
+                token.accessToken = account.accessToken;
             }
 
             if (Date.now() > (token.expiresAt as number)) {
-                // Empty token to log the user out
-                return {} 
+                return {
+                    ...token,
+                    expired: true
+                } 
             }
 
             // Returns the token for use in session
@@ -35,10 +37,9 @@ export const authOptions: NextAuthOptions = ({
         async session({session, token}) {
             console.log('SESSION CALLBACK', {session, token})
             // Adds the token to the session to keep track of the login
-            return { 
-                ...session,
-                token
-            }
+            session.token = token
+            session.expired = (token as {expired?: boolean}).expired ?? false
+            return session
         }
     },
     secret: process.env.NEXTAUTH_SECRET
