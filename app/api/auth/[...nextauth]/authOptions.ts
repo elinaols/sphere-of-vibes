@@ -23,6 +23,12 @@ export const authOptions: NextAuthOptions = ({
                 token.expires_at = account.expires_at;
                 token.accessToken = account.access_token;
             }
+
+            if (Date.now() > (token.expiresAt as number)) {
+                // Empty token to log the user out
+                return {} 
+            }
+
             // Returns the token for use in session
             return token
         },
