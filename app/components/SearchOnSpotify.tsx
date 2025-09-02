@@ -27,20 +27,25 @@ export default function SearchOnSpotify({setResults, setType}: Props) {
 
 	console.log("Access token: ", session?.accessToken)
 	async function onSubmit(event: FormEvent<HTMLFormElement>) {
-		try {
-			event.preventDefault()
+		event.preventDefault()
 
-			const formData = new FormData(event.currentTarget)
-			const query = formData.get("query")
-			const type = formData.get("type")
+		if (!session?.accessToken) {
+			setPopUpMessage("Logga in först!")
+			return
+		}
 
-			if (typeof type === "string") setType(type as SpotifySearchType)
+		const formData = new FormData(event.currentTarget)
+		const query = formData.get("query")
+		const type = formData.get("type")
 
-			if (!query) {
-				setPopUpMessage("Fyll i sökfältet")
-				return
-			}
+		if (typeof type === "string") setType(type as SpotifySearchType)
 
+		if (!query) {
+			setPopUpMessage("Fyll i sökfältet")
+			return
+		}
+
+		try {	
 			const response = await fetch(
 				`/api/apiData?query=${encodeURIComponent(query as string)}&type=${encodeURIComponent(type as string)}`,
 				{

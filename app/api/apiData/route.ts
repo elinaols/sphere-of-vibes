@@ -22,7 +22,7 @@ export async function GET(req: Request) {
     const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query as string)}&market=from_token&type=${encodeURIComponent(type as string)}&limit=5`,
         {
             headers: {
-                Authorization: `Bearer ${session.token.accessToken}`, // Sends the token to the API
+                Authorization: `Bearer ${session.accessToken}`, // Sends the token to the API
                 'Content-Type': 'application/json' 
             }
         }
