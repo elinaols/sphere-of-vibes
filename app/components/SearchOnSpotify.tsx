@@ -14,12 +14,12 @@ export default function SearchOnSpotify({setResults, setType}: Props) {
     const [inputValue, setInputValue] = useState('')
 	const {data: session} = useSession()
 
-	const disable = session ? "cursor-grab" : "cursor-not-allowed"
+	const disable = session?.accessToken ? "cursor-grab" : "cursor-not-allowed"
 
 	const [popUpMessage, setPopUpMessage] = useState<string | null>(null)
 
 	const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-		if (!session) {
+		if (!session?.accessToken) {
 			e.preventDefault()
 			setPopUpMessage("Logga in först!")
 		}
