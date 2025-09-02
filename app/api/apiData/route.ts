@@ -60,6 +60,21 @@ export async function GET(req: Request) {
         return NextResponse.json({ error: "No authenticated user" }, { status: 401 })
     }
 
+    let accessToken = session.token.accessToken
+    let refreshToken = session.token.refreshToken
+    let expiresAt = session.token.expiresAt || 0
+
+    // Om token har gått ut → refresha
+    if (Date.now() > expiresAt) {
+        const refreshed = await refreshAccessToken({ accessToken, refreshToken, expiresAt })
+        if (refreshed.error) {
+        return NextResponse.json({ error: "Could not refresh token" }, { status: 401 })
+        }
+        accessToken = refreshed.accessToken
+        refreshToken = refreshed.refreshToken
+        expiresAt = refreshed.expiresAt
+    }
+
     // Calls the Spotify API with the query and type. EncodedUriComponent is used to avoid problems with special characters
     const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query as string)}&market=from_token&type=${encodeURIComponent(type as string)}&limit=5`,
         {
