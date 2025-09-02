@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server' // Helps with creating and returning 
 import { getServerSession } from 'next-auth'
 import { authOptions } from '../auth/[...nextauth]/authOptions'
 
+// TODO: Create function for refreshing access token
+
 // Custom request handler to be able to make requests to Spotifys API
 export async function GET(req: Request) {
     // Takes the request URL to get all parameters after ? 
