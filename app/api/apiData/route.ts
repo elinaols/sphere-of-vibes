@@ -14,6 +14,7 @@ export async function GET(req: Request) {
 
     // Gets the current user session (including accessToken)
     const session = await getServerSession(authOptions)
+    console.log('Session in apiData', session)
 
     // Return error if user isn't logged in or token is missing
     if (!session?.token?.accessToken) {

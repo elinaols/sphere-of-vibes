@@ -1,6 +1,13 @@
 import SpotifyProvider from "next-auth/providers/spotify"
 import type { NextAuthOptions } from "next-auth"
 
+interface SpotifyAccount {
+    id: string,
+    access_token: string,
+    refresh_token: string,
+    expires_in: number
+}
+
 // Configuration to be able to authenticate users with the SpotifyProvider
 export const authOptions: NextAuthOptions = ({
     providers: [
@@ -19,17 +26,15 @@ export const authOptions: NextAuthOptions = ({
             console.log('JWT CALLBACK', {token, account})
             // Checks if it's a new login and saves user account info in the token
             if (account) {
-                token.id = account.id;
-                token.expires_at = account.expiresAt;
-                token.accessToken = account.accessToken;
+                const spotifyAccount = account as unknown as SpotifyAccount
+                
+                token.id = spotifyAccount.id;
+                token.expiresAt = Date.now() + spotifyAccount.expires_in * 1000;
+                token.accessToken = spotifyAccount.access_token;
             }
 
             if (Date.now() > (token.expiresAt as number)) {
-                return {
-                    ...token,
-                    expired: true,
-                    accessToken: token.accessToken
-                } 
+                token.expire = true
             }
 
             // Returns the token for use in session
