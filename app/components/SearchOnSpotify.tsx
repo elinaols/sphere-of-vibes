@@ -25,6 +25,7 @@ export default function SearchOnSpotify({setResults, setType}: Props) {
 		}
 	}
 
+	console.log("Access token: ", session?.accessToken)
 	async function onSubmit(event: FormEvent<HTMLFormElement>) {
 		try {
 			event.preventDefault()

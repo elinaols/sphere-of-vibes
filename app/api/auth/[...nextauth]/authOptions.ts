@@ -26,6 +26,7 @@ async function refreshAccessToken(token: SpotifyToken) {
         // Fetches a new access token using the refresh token
         const response = await fetch(url, {
             method: "POST",
+            // Buffer is used to encode the client ID and secret to be able to authenticate the request
             headers: {
                 "Authorization": `Basic ` + Buffer.from(`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`).toString("base64"),
                 "Content-Type": "application/x-www-form-urlencoded"
@@ -33,8 +34,10 @@ async function refreshAccessToken(token: SpotifyToken) {
             body: body.toString()
         })
 
+        // Get the refreshed tokens
         const refreshedTokens = await response.json()
 
+        // If the response is not ok, throw an error
         if (!response.ok) throw refreshedTokens
 
         // Returns the new token
