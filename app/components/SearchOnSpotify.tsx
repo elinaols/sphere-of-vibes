@@ -41,7 +41,12 @@ export default function SearchOnSpotify({setResults, setType}: Props) {
 			}
 
 			const response = await fetch(
-				`/api/apiData?query=${encodeURIComponent(query as string)}&type=${encodeURIComponent(type as string)}`
+				`/api/apiData?query=${encodeURIComponent(query as string)}&type=${encodeURIComponent(type as string)}`,
+				{
+					headers: {
+						Authorization: `Bearer ${session?.accessToken}`
+					}
+				}
 			)
 
 			if (!response.ok) throw new Error("Failed to fetch data.")
