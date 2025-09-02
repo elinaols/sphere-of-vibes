@@ -1,6 +1,6 @@
 "use client"
-import React, {FormEvent, useState, useEffect} from "react"
-import {useSession, signOut} from "next-auth/react"
+import React, {FormEvent, useState} from "react"
+import {useSession} from "next-auth/react"
 import {SpotifyResultsData, SpotifySearchType} from "@/types/json"
 import PopUp from "./PopUp"
 
@@ -13,12 +13,6 @@ type Props = {
 export default function SearchOnSpotify({setResults, setType}: Props) {
     const [inputValue, setInputValue] = useState('')
 	const {data: session} = useSession()
-
-	useEffect(() => {
-		if (session?.expired) {
-			signOut()
-		}
-	}, [session])
 
 	const disable = session ? "cursor-grab" : "cursor-not-allowed"
 

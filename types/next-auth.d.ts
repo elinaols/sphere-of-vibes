@@ -1,17 +1,13 @@
 import NextAuth from 'next-auth'
-import { JWT as DefaultJWT } from 'next-auth/jwt'
 
 declare module "next-auth" {
     interface Session {
         accessToken?: string
-        token?: JWT
-        expired?: boolean
+        token?: {
+            accessToken: string
+        }
     }
-    interface JWT extends DefaultJWT {
-        id?: string
+    interface JWT {
         accessToken?: string
-        refreshToken?: string
-        expiresAt?: number
-        expired?: boolean
     }
 }

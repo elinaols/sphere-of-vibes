@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useSession, signIn, signOut } from 'next-auth/react'
 
 type Props = {
@@ -8,12 +8,6 @@ type Props = {
 
 export default function LoginStatus({darkMode}: Props) {
     const { data: session } = useSession()
-
-    useEffect(() => {
-        if (session?.expired) {
-            signOut()
-        }
-    }, [session])
     
     if (session) {
         return (
