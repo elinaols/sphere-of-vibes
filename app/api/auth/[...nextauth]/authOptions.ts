@@ -27,7 +27,8 @@ export const authOptions: NextAuthOptions = ({
             if (Date.now() > (token.expiresAt as number)) {
                 return {
                     ...token,
-                    expired: true
+                    expired: true,
+                    accessToken: token.accessToken
                 } 
             }
 
@@ -38,6 +39,7 @@ export const authOptions: NextAuthOptions = ({
             console.log('SESSION CALLBACK', {session, token})
             // Adds the token to the session to keep track of the login
             session.token = token
+            session.accessToken = (token as {accessToken?: string}).accessToken
             session.expired = (token as {expired?: boolean}).expired ?? false
             return session
         }
