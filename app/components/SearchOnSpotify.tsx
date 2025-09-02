@@ -13,58 +13,46 @@ type Props = {
 export default function SearchOnSpotify({setResults, setType}: Props) {
     const [inputValue, setInputValue] = useState('')
 	const {data: session} = useSession()
-
-	const disable = session?.accessToken ? "cursor-grab" : "cursor-not-allowed"
-
 	const [popUpMessage, setPopUpMessage] = useState<string | null>(null)
-
+	
 	const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-		if (!session?.accessToken) {
+		if (!session) {
 			e.preventDefault()
 			setPopUpMessage("Logga in först!")
 		}
 	}
-
-	console.log("Access token: ", session?.accessToken)
+	
 	async function onSubmit(event: FormEvent<HTMLFormElement>) {
-		event.preventDefault()
-
-		if (!session?.accessToken) {
-			setPopUpMessage("Logga in först!")
-			return
-		}
-
-		const formData = new FormData(event.currentTarget)
-		const query = formData.get("query")
-		const type = formData.get("type")
-
-		if (typeof type === "string") setType(type as SpotifySearchType)
-
-		if (!query) {
-			setPopUpMessage("Fyll i sökfältet")
-			return
-		}
-
-		try {	
-			const response = await fetch(
-				`/api/apiData?query=${encodeURIComponent(query as string)}&type=${encodeURIComponent(type as string)}`,
-				{
-					headers: {
-						Authorization: `Bearer ${session?.accessToken}`
-					}
+		try {
+			event.preventDefault()
+			
+			const formData = new FormData(event.currentTarget)
+			const query = formData.get("query")
+			const type = formData.get("type")
+			
+			if (typeof type === "string") setType(type as SpotifySearchType)
+				
+				if (!query) {
+					setPopUpMessage("Fyll i sökfältet")
+					return
 				}
-			)
-			console.log("Response status: ", response.status, response.statusText)
-			if (!response.ok) throw new Error("Failed to fetch data.")
-
-			const data = await response.json()
-			setResults(data)
-		} catch (error) {
-			console.error("Error while fetching data", error)
+				
+				const response = await fetch(
+					`https://api.spotify.com/v1/search?query=${encodeURIComponent(query as string)}&type=${encodeURIComponent(type as string)}`
+				)
+				
+				if (!response.ok) throw new Error("Failed to fetch data.")
+					
+					const data = await response.json()
+					setResults(data)
+				} catch (error) {
+					console.error("Error while fetching data", error)
 		} finally {
-            setInputValue('')
+			setInputValue('')
         }
 	}
+	
+	const disable = session ? "cursor-grab" : "cursor-not-allowed"
 
 	return (
 		<>
