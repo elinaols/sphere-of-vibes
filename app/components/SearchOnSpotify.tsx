@@ -49,7 +49,7 @@ export default function SearchOnSpotify({setResults, setType}: Props) {
 					}
 				}
 			)
-
+			console.log("Response status: ", response.status, response.statusText)
 			if (!response.ok) throw new Error("Failed to fetch data.")
 
 			const data = await response.json()
