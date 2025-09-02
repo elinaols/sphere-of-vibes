@@ -9,7 +9,7 @@ type Props = {
 export default function LoginStatus({darkMode}: Props) {
     const { data: session } = useSession()
     
-    if (session?.accessToken) {
+    if (session) {
         return (
             <div className={`flex flex-col sm:flex-row justify-center p-2 ${darkMode ? 'text-(--accent)' : 'text-(--text-color)'}`}>
                 <p className='pe-3 pb-2 sm:pb-0'>Inloggad som <span className='font-bold'>{session.user?.email}</span></p>
