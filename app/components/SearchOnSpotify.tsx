@@ -13,46 +13,47 @@ type Props = {
 export default function SearchOnSpotify({setResults, setType}: Props) {
     const [inputValue, setInputValue] = useState('')
 	const {data: session} = useSession()
+
+	const disable = session ? "cursor-grab" : "cursor-not-allowed"
+
 	const [popUpMessage, setPopUpMessage] = useState<string | null>(null)
-	
+
 	const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
 		if (!session) {
 			e.preventDefault()
 			setPopUpMessage("Logga in först!")
 		}
 	}
-	
+
 	async function onSubmit(event: FormEvent<HTMLFormElement>) {
 		try {
 			event.preventDefault()
-			
+
 			const formData = new FormData(event.currentTarget)
 			const query = formData.get("query")
 			const type = formData.get("type")
-			
+
 			if (typeof type === "string") setType(type as SpotifySearchType)
-				
-				if (!query) {
-					setPopUpMessage("Fyll i sökfältet")
-					return
-				}
-				
-				const response = await fetch(
-					`/api/apiData?query=${encodeURIComponent(query as string)}&type=${encodeURIComponent(type as string)}`
-				)
-				
-				if (!response.ok) throw new Error("Failed to fetch data.")
-					
-					const data = await response.json()
-					setResults(data)
-				} catch (error) {
-					console.error("Error while fetching data", error)
+
+			if (!query) {
+				setPopUpMessage("Fyll i sökfältet")
+				return
+			}
+
+			const response = await fetch(
+				`/api/apiData?query=${encodeURIComponent(query as string)}&type=${encodeURIComponent(type as string)}`
+			)
+
+			if (!response.ok) throw new Error("Failed to fetch data.")
+
+			const data = await response.json()
+			setResults(data)
+		} catch (error) {
+			console.error("Error while fetching data", error)
 		} finally {
-			setInputValue('')
+            setInputValue('')
         }
 	}
-	
-	const disable = session ? "cursor-grab" : "cursor-not-allowed"
 
 	return (
 		<>
